@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the php module.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function wikilingo_enable() {
+  $format_exists = (bool) db_query_range('SELECT 1 FROM {filter_format} WHERE name = :name', 0, 1, array(':name' => 'wikilingo'))->fetchField();
+  // Add a wikiLingo format, if it does not exist. Do this only for the
+  // first install (or if the format has been manually deleted) as there is no
+  // reliable method to identify the format in an uninstall hook or in
+  // subsequent clean installs.
+  if (!$format_exists) {
+    $wikilingo_format = array(
+      'format' => 'wikilingo_format',
+      'name' => 'wikiLingo',
+      // 'Plain text' format is installed with a weight of 10 by default. Use a
+      // higher weight here to ensure that this format will not be the default
+      // format for anyone.
+      'weight' => 11,
+      'filters' => array(
+        // Enable the PHP evaluator filter.
+        'wikilingo_filter' => array(
+          'weight' => 0,
+          'status' => 1,
+        ),
+      ),
+    );
+    $wikilingo_format = (object) $wikilingo_format;
+    filter_format_save($wikilingo_format);
+
+    drupal_set_message(t('A wikiLingo text format has been created.'));
+  }
+}
+
+/**
+ * Implements hook_disable().
+ */
+function wikilingo_disable() {
+  drupal_set_message(t('The wikiLingo module has been disabled. Any existing content that was using the wikiLingo filter will now be visible in plain text. This might pose a security risk by exposing sensitive information, if any, used in the wikiLingo code.'));
+}

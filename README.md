@@ -1,2 +1,4 @@
-drupal
+wikiLingo drupal module
 ======
+
+needs wikiLingo
