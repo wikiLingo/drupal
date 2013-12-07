@@ -1,0 +1,3 @@
+[submodule "wikiLingo"]
+	path = wikilingo/wikiLingo
+	url = https://github.com/wikiLingo/wikiLingo.git
