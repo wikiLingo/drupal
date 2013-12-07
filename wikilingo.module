@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * @file
+ * Additional filter for PHP input.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function wikilingo_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#wikiLingo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('A wiki markup language and programming environment') . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Enabling execution of wikiLingo markup in text fields') . '</dt>';
+      $output .= '<dd>' . t('The wikiLingo filter module allows users with the proper permissions to include special markup') . '</dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function wikilingo_permission() {
+  return array(
+    'use wikiLingo for settings' => array(
+      'title' => t('Use wikiLingo for settings'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Parses wikiLingo
+ *
+ * @param $code
+ *   The code to parse.
+ *
+ * @return
+ *   A string containing the printed output of the code, followed by the
+ *   returned output of the code.
+ *
+ * @ingroup wikilingo_wrappers
+ */
+function wikiLingo_parse($code) {
+  global $theme_path, $theme_info, $conf;
+  spl_autoload_register('wikiLingo_autoload');
+  $scripts = new WikiLingo\Utilities\Scripts();
+  $scripts
+      //add some css
+      ->addCssLocation("//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css")
+
+      //add some javascript
+      ->addScriptLocation("//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js")
+      ->addScriptLocation("http://code.jquery.com/ui/1.10.3/jquery-ui.js");
+
+  $wikiLingo = new WikiLingo\Parser($scripts);
+  $parsed = $wikiLingo->parse($code);
+  drupal_add_html_head($element = array(
+      '#type' => 'markup',
+      '#markup' => $scripts->renderCss() . $scripts->renderScript(),
+  ), 'wikiLing-tmpl');
+
+  return $parsed;
+}
+
+
+function wikilingo_autoload($class) {
+  $root = dirname(__FILE__);
+  $file = $root . "/wikiLingo/" . str_replace('\\', '/', $class) . '.php';
+  if (!class_exists($class) && file_exists($file)) {
+    include $file;
+  }
+}
+
+/**
+ * Implements callback_filter_tips().
+ *
+ * @see wikiLingo_filter_info()
+ */
+function _wikilingo_filter_tips($filter, $format, $long = FALSE) {
+  global $base_url;
+  if ($long) {
+    $output = '<h4>' . t('Using wikiLingo') . '</h4>';
+    $output .= '<p>' . '<p>' . t('wikiLingo is a programming language') . '</p>';
+    return $output;
+  }
+  else {
+    return t('wikiLingo');
+  }
+}
+
+/**
+ * Implements hook_filter_info().
+ *
+ * Provide wikiLingo code filter. Use with care.
+ */
+function wikilingo_filter_info() {
+  $filters['wikilingo_filter'] = array(
+    'title' => t('wikiLingo'),
+    'description' => t('Parse wikiLingo'),
+    'process callback' => 'wikilingo_parse',
+    'tips callback' => '_wikilingo_filter_tips',
+    'cache' => FALSE,
+  );
+  return $filters;
+}
