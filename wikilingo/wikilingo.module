@@ -49,33 +49,24 @@ function wikilingo_permission() {
  */
 function wikiLingo_parse($code) {
   global $theme_path, $theme_info, $conf;
-  spl_autoload_register('wikiLingo_autoload');
+  require_once ('../vendor/autoload.php');
   $scripts = new WikiLingo\Utilities\Scripts();
   $scripts
-      //add some css
-      ->addCssLocation("//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css")
+    //add some css
+    ->addCssLocation("//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css")
 
-      //add some javascript
-      ->addScriptLocation("//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js")
-      ->addScriptLocation("http://code.jquery.com/ui/1.10.3/jquery-ui.js");
+    //add some javascript
+    ->addScriptLocation("//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js")
+    ->addScriptLocation("http://code.jquery.com/ui/1.10.3/jquery-ui.js");
 
   $wikiLingo = new WikiLingo\Parser($scripts);
   $parsed = $wikiLingo->parse($code);
   drupal_add_html_head($element = array(
-      '#type' => 'markup',
-      '#markup' => $scripts->renderCss() . $scripts->renderScript(),
+    '#type' => 'markup',
+    '#markup' => $scripts->renderCss() . $scripts->renderScript(),
   ), 'wikiLing-tmpl');
 
   return $parsed;
-}
-
-
-function wikilingo_autoload($class) {
-  $root = dirname(__FILE__);
-  $file = $root . "/wikiLingo/" . str_replace('\\', '/', $class) . '.php';
-  if (!class_exists($class) && file_exists($file)) {
-    include $file;
-  }
 }
 
 /**
