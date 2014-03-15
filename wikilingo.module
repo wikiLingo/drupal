@@ -49,7 +49,7 @@ function wikilingo_permission() {
  */
 function wikiLingo_parse($code) {
   global $theme_path, $theme_info, $conf;
-  require_once ('../vendor/autoload.php');
+  require_once ('vendor/autoload.php');
   $scripts = new WikiLingo\Utilities\Scripts();
   $scripts
     //add some css
