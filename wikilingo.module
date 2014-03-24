@@ -50,6 +50,8 @@ function wikilingo_permission() {
 function wikiLingo_parse($code) {
   global $theme_path, $theme_info, $conf;
   require_once ('vendor/autoload.php');
+  require_once ('wikilingo.events.custom.php');
+
   $module_path = drupal_get_path('module', 'wikilingo');
   $scripts = new WikiLingo\Utilities\Scripts($module_path . "/vendor");
   $scripts
@@ -61,6 +63,10 @@ function wikiLingo_parse($code) {
     ->addScriptLocation("~/jquery/jquery-ui/ui/minified/jquery-ui.min.js");
 
   $wikiLingo = new WikiLingo\Parser($scripts);
+
+  //event handler
+  (new wikiLingoEventsCustom($wikiLingo->events));
+
   $parsed = $wikiLingo->parse($code);
   drupal_add_html_head($element = array(
     '#type' => 'markup',
