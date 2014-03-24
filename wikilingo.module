@@ -50,14 +50,15 @@ function wikilingo_permission() {
 function wikiLingo_parse($code) {
   global $theme_path, $theme_info, $conf;
   require_once ('vendor/autoload.php');
-  $scripts = new WikiLingo\Utilities\Scripts();
+  $module_path = drupal_get_path('module', 'wikilingo');
+  $scripts = new WikiLingo\Utilities\Scripts($module_path . "/vendor");
   $scripts
     //add some css
-    ->addCssLocation("//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css")
+    ->addCssLocation("~/jquery/jquery-ui/themes/base/minified/jquery.ui.theme.min.css")
 
     //add some javascript
-    ->addScriptLocation("//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js")
-    ->addScriptLocation("http://code.jquery.com/ui/1.10.3/jquery-ui.js");
+    ->addScriptLocation("~/jquery/jquery/jquery-1.10.2.js")
+    ->addScriptLocation("~/jquery/jquery-ui/ui/minified/jquery-ui.min.js");
 
   $wikiLingo = new WikiLingo\Parser($scripts);
   $parsed = $wikiLingo->parse($code);
