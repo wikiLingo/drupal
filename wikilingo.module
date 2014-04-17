@@ -64,6 +64,22 @@ function wikiLingo_parse($code) {
 
   $wikiLingo = new WikiLingo\Parser($scripts);
 
+  $wikiLingo->events
+    ->bind(new WikiLingo\Event\Parsed\RenderPermission(function(WikiLingo\Parsed &$parsed) {
+      global $user;
+
+      if (
+        $parsed->type == "Plugin"
+        && $parsed->expression->type == "Permission"
+      ) {
+        if (isset($parsed->expression->parametersRaw['role'])) {
+          $role = $parsed->expression->parametersRaw['role'];
+          if (in_array($role, $user->roles)) {
+            $parsed->expressionPermissible = true;
+          }
+        }
+      }
+    }));
   //event handler
   (new wikiLingoEventsCustom($wikiLingo->events));
 
