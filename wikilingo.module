@@ -53,7 +53,7 @@ function wikiLingo_parse($code) {
   require_once ('wikilingo.events.custom.php');
 
   $module_path = drupal_get_path('module', 'wikilingo');
-  $scripts = new WikiLingo\Utilities\Scripts($module_path . "/vendor");
+  $scripts = new WikiLingo\Utilities\Scripts($module_path, $module_path . "/vendor/");
   $scripts
     //add some css
     ->addCssLocation("~/jquery/jquery-ui/themes/base/minified/jquery.ui.theme.min.css")
@@ -71,7 +71,7 @@ function wikiLingo_parse($code) {
   drupal_add_html_head($element = array(
     '#type' => 'markup',
     '#markup' => $scripts->renderCss() . $scripts->renderScript(),
-  ), 'wikiLing-tmpl');
+  ), 'wikiLingo-tmpl');
 
   return $parsed;
 }
