@@ -3,20 +3,31 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d6ac67ccd6de9756e0a062cdbeff8095",
+    "hash": "9d6d9a0553aa230207843536e4b12c5b",
     "packages": [
+        {
+            "name": "codemirror/codemirror",
+            "version": "3.19.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.tiki.org/dist/codemirror-codemirror-3.19.0.zip",
+                "reference": "3.19.0",
+                "shasum": "295a61adc7c494e6f963355b250941265d8d2965"
+            },
+            "type": "library"
+        },
         {
             "name": "flp/flp",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FutureLink-Protocol/php.git",
-                "reference": "bcf08915b4c0dd346701f11ddb6b35721c01d5fc"
+                "reference": "77f6120c07f779c1a5a0d135e487e2fb8f94ca89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FutureLink-Protocol/php/zipball/bcf08915b4c0dd346701f11ddb6b35721c01d5fc",
-                "reference": "bcf08915b4c0dd346701f11ddb6b35721c01d5fc",
+                "url": "https://api.github.com/repos/FutureLink-Protocol/php/zipball/77f6120c07f779c1a5a0d135e487e2fb8f94ca89",
+                "reference": "77f6120c07f779c1a5a0d135e487e2fb8f94ca89",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +56,7 @@
                     "name": "Robert Plummer",
                     "email": "rplummer@visop-dev.com",
                     "homepage": "http://visop-dev.com",
-                    "role": "Lead Developer"
+                    "role": "Assistant Developer"
                 },
                 {
                     "name": "Luke Gerhardt",
@@ -56,7 +67,7 @@
             ],
             "description": "FutureLink-Protocol implementation in PHP",
             "homepage": "https://github.com/FutureLink-Protocol",
-            "time": "2014-03-14 20:46:17"
+            "time": "2014-04-02 21:03:56"
         },
         {
             "name": "gabordemooij/redbean",
@@ -135,6 +146,45 @@
             "type": "library"
         },
         {
+            "name": "mediumjs/mediumjs",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jakiestfu/Medium.js.git",
+                "reference": "001f110b0171cc4e5b733c05a19a34f5baebbf0b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jakiestfu/Medium.js/zipball/001f110b0171cc4e5b733c05a19a34f5baebbf0b",
+                "reference": "001f110b0171cc4e5b733c05a19a34f5baebbf0b",
+                "shasum": ""
+            },
+            "require": {
+                "rangy/rangy": ">=1.3",
+                "undojs/undojs": ">=1"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Plummer",
+                    "email": "rplummer@visop-dev.com",
+                    "homepage": "http://visop-dev.com",
+                    "role": "Assistant Developer"
+                },
+                {
+                    "name": "Jacob Kelley",
+                    "email": "jakie8@gmail.com",
+                    "homepage": "http://jakiestfu.com",
+                    "role": "Lead Developer"
+                }
+            ],
+            "time": "2014-04-02 17:28:29"
+        },
+        {
             "name": "rangy/rangy",
             "version": "1.3",
             "dist": {
@@ -146,27 +196,63 @@
             "type": "library"
         },
         {
+            "name": "undojs/undojs",
+            "version": "1",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/jzaefferer/undo/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
+        {
+            "name": "wikilingo/codemirror",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wikiLingo/CodeMirror.git",
+                "reference": "c35a89f1d15ec222ec152e260bf693be800a77e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wikiLingo/CodeMirror/zipball/c35a89f1d15ec222ec152e260bf693be800a77e2",
+                "reference": "c35a89f1d15ec222ec152e260bf693be800a77e2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Syntax highlighter for wikiLingo",
+            "time": "2014-03-27 17:26:12"
+        },
+        {
             "name": "wikilingo/wikilingo",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wikiLingo/wikiLingo.git",
-                "reference": "e695f4344a9a86fad66d48fc3af116c027b976d3"
+                "reference": "a3160407627d0e9cd7b1f36058644d4b3036364a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wikiLingo/wikiLingo/zipball/e695f4344a9a86fad66d48fc3af116c027b976d3",
-                "reference": "e695f4344a9a86fad66d48fc3af116c027b976d3",
+                "url": "https://api.github.com/repos/wikiLingo/wikiLingo/zipball/a3160407627d0e9cd7b1f36058644d4b3036364a",
+                "reference": "a3160407627d0e9cd7b1f36058644d4b3036364a",
                 "shasum": ""
             },
             "require": {
+                "codemirror/codemirror": "3.19",
                 "flp/flp": "dev-master",
                 "gabordemooij/redbean": ">=3.5.1",
                 "jquery/jquery": ">=1.10.2",
                 "jquery/jquery-ui": ">=1.10.3",
                 "md5/md5": ">=1.1.0",
+                "mediumjs/mediumjs": "dev-master",
                 "php": ">=5.4.0",
-                "rangy/rangy": ">=1.3"
+                "rangy/rangy": ">=1.3",
+                "wikilingo/codemirror": "dev-master"
             },
             "require-dev": {
                 "bafs/testify": "dev-master"
@@ -192,7 +278,7 @@
                     "role": "Lead Developer"
                 }
             ],
-            "time": "2014-03-14 20:29:49"
+            "time": "2014-04-16 20:50:51"
         }
     ],
     "packages-dev": [
@@ -242,6 +328,8 @@
     "stability-flags": {
         "flp/flp": 20,
         "wikilingo/wikilingo": 20,
+        "mediumjs/mediumjs": 20,
+        "wikilingo/codemirror": 20,
         "bafs/testify": 20
     },
     "platform": {
