@@ -79,6 +79,9 @@ function wikiLingo_parse($code) {
           }
         }
       }
+    }))
+    ->bind(new WikiLingo\Event\Parsed\RenderBlocked(function(WikiLingo\Parsed &$parsed, &$return) {
+      $return = '';
     }));
   //event handler
   (new wikiLingoEventsCustom($wikiLingo->events));
